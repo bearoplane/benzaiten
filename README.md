@@ -1,4 +1,13 @@
+# Benzaiten
+
+Benzaiten is a Japanese syncretic deity corresponding to Saraswati, the Hindu goddess of, _inter alia_, knowledge, music, art, wisdom and learning. Since the Meiji reforms, she has had a much lighter schedule, and so I asked her to help put together some new book emails for the University of New Brunswick Faculty of Law, and she graciously agreed to do so.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+In addition to the basic packages that are created by that tool, I use the following npm packages.
+
+- [react-dropzone](https://github.com/react-dropzone/react-dropzone)
+- [classnames]()
 
 ## Available Scripts
 
