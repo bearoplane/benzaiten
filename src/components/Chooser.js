@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
 
-import Uploader from './Uploader';
-
 import classNames from 'classnames';
 
-import './Main.css';
+// import './Main.css';
 
 /**
- * The Main component which handles the main workflow.
- * That is:
- *  - Uploader
- *  - Chooser
- *  - Outputter
+ * The Chooser component accepts an array of books and allows a user to choose
+ *  the ones to appear on the Book List.
  *
  * @version 0.0.1
  * @author [Matt Poirier](https://github.com/bearoplane)
  */
-class Main extends Component {
+class Chooser extends Component {
   render() {
     return (
       <div className="Main">
@@ -26,4 +21,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default Chooser;

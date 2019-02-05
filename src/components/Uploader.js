@@ -2,43 +2,9 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 
 import classNames from 'classnames';
+import { smartSplit } from '../utils';
 
 import './Uploader.css';
-
-const UNESCAPED = 'UNESCAPED';
-const ESCAPED = 'ESCAPED';
-
-function smartSplit(str) {
-  let chars = str.split('');
-  let mode = UNESCAPED;
-  let buffer = '';
-
-  return chars.reduce((ret, char) => {
-    ret = ret || [];
-
-    if (char === '"') {
-      if (mode === ESCAPED) {
-        ret.push(buffer);
-        buffer = '';
-        mode = UNESCAPED;
-      } else {
-        // buffer += char;
-        mode = ESCAPED;
-      }
-    } else if (char === ',') {
-      if (mode === ESCAPED) {
-        buffer += char;
-      } else {
-        ret.push(buffer);
-        buffer = '';
-      }
-    } else {
-      buffer += char;
-    }
-
-    return ret;
-  }, []);
-}
 
 class BookList extends Component {
   render() {
@@ -96,6 +62,8 @@ class Uploader extends Component {
       const books = lines.map(line => smartSplit(line).reduce((ret, val, i) => ({ ...ret, [headings[i]]: val }), {}))
 
       this.setState({ books });
+
+      console.log(books);
     }
     reader.onabort = () => console.log('file reading was aborted');
     reader.onerror = () => console.log('file reading has failed');
