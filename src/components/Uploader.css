@@ -1,3 +1,12 @@
 .Uploader {
-  
+
+}
+
+.dropzone {
+  padding: 2vmin;
+  width: 80%;
+  margin: auto;
+  border-radius: 1vmin;
+  border: 1px dashed #111;
+  text-align: center;
 }

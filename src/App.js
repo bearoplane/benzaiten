@@ -4,11 +4,13 @@ import './App.css';
 
 import Main from './components/Main';
 
+import BookStore from './BookStore.js';
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Main />
+        <Main store={BookStore} />
       </div>
     );
   }

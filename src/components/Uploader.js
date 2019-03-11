@@ -2,23 +2,9 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 
 import classNames from 'classnames';
-import { smartSplit } from '../utils';
+import { smartSplit, templater } from '../utils';
 
 import './Uploader.css';
-
-class BookList extends Component {
-  render() {
-    let { books } = this.props;
-
-    return books.map((book, i) => (
-      <div key={i}>
-        <h3>{book.title}</h3>
-        <h4>{book.author_name}</h4>
-        <hr />
-      </div>
-    ))
-  }
-}
 
 /**
  * The Uploader component which accepts a .csv file
@@ -27,18 +13,25 @@ class BookList extends Component {
  * @author [Matt Poirier](https://github.com/bearoplane)
  */
 class Uploader extends Component {
-  state = {
-    books: []
-  }
-
   /**
    * onDrop is called by <Dropzone> when a file is uploaded.
    * It's main function is to read the file into memory.
    */
   onDrop = (acceptedFiles, rejectedFiles) => {
-    // @todo: error handling for rejectedFiles and what not
-    console.log('accepted', acceptedFiles);
-    console.log('rejected', rejectedFiles);
+    const { updateBooks } = this.props;
+
+    if (acceptedFiles.length !== 1) {
+      // @todo do error message
+      console.log('Must be exactly one file.');
+      return;
+    }
+
+    let droppedFile = acceptedFiles[0];
+
+    if (droppedFile.type !== 'text/csv') {
+      console.log('Must be CSV file.');
+      return;
+    }
 
     // (a) instantiate the FileReader, (b) define its events, (c) read in the file
     const reader = new FileReader();
@@ -61,19 +54,17 @@ class Uploader extends Component {
        */
       const books = lines.map(line => smartSplit(line).reduce((ret, val, i) => ({ ...ret, [headings[i]]: val }), {}))
 
-      this.setState({ books });
-
-      console.log(books);
+      updateBooks(books);
     }
     reader.onabort = () => console.log('file reading was aborted');
     reader.onerror = () => console.log('file reading has failed');
 
-    reader.readAsText(acceptedFiles[0])
+    reader.readAsText(droppedFile);
   }
 
   render() {
     return (
-      <div>
+      <div className="Uploader">
         <Dropzone onDrop={this.onDrop}>
           {({getRootProps, getInputProps, isDragActive}) => {
             return (
@@ -91,7 +82,6 @@ class Uploader extends Component {
             )
           }}
         </Dropzone>
-        <BookList books={this.state.books} />
       </div>
     );
   }
