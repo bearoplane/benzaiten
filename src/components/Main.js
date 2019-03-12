@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Uploader from './Uploader';
-import Chooser from './Chooser';
-
 import Header from './Header';
 
-import classNames from 'classnames';
+import Uploader from './Uploader';
+import Chooser from './Chooser';
+import Generator from './Generator';
 
 import { withStyles } from '@material-ui/core/styles';
 
 import './Main.css';
 
-const styles = {
-
-};
+const styles = theme => ({
+  shim: {
+    ...theme.mixins.toolbar,
+  }
+});
 
 /**
  * The Main component which handles the main workflow.
@@ -27,6 +28,10 @@ const styles = {
  * @author [Matt Poirier](https://github.com/bearoplane)
  */
 class Main extends Component {
+  state = {
+    generatorOpen: false
+  }
+
   updateBooks = (books) => {
     const { store } = this.props;
 
@@ -62,24 +67,39 @@ class Main extends Component {
     this.forceUpdate();
   }
 
+  toggleOpenGenerator = () => {
+    const { generatorOpen } = this.state;
+
+    this.setState({
+      generatorOpen: !generatorOpen
+    });
+  }
+
   render() {
-    const { store } = this.props;
+    const { store, classes } = this.props;
+    const { generatorOpen } = this.state;
 
     const books = store.getBooks();
+    const selectedBooks = store.getSelectedBooks();
 
     return (
-      <div className="Main">
+      <>
         <Header
-          counts={{ selected: store.getSelectedBooks().length, total: books.length }}
+          counts={{ selected: selectedBooks.length, total: books.length }}
           selectAll={this.selectAll}
           selectNone={this.selectNone}
+          openGenerator={this.toggleOpenGenerator}
         />
+        <div className={classes.shim} />
         {
           books.length === 0 ?
           <Uploader updateBooks={this.updateBooks} /> :
-          <Chooser toggleChecked={this.toggleChecked} books={books} />
+          <React.Fragment>
+            <Chooser toggleChecked={this.toggleChecked} books={books} />
+            <Generator open={generatorOpen} handleClose={this.toggleOpenGenerator} books={selectedBooks} />
+          </React.Fragment>
         }
-      </div>
+      </>
     );
   }
 }

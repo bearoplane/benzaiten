@@ -23,6 +23,12 @@ const styles = {
     flexGrow: 1,
     backgroundColor: "rgba(215, 0, 0, 0.85)",
     boxShadow: "0px 2px 2px 0px rgba(0, 0, 0, 0.4)",
+  },
+  selectButton: {
+    margin: "0 1vmin",
+  },
+  white: {
+    color: "#fff",
   }
 };
 
@@ -33,7 +39,7 @@ const styles = {
  */
 class Header extends Component {
   render() {
-    const { classes, counts, selectAll, selectNone } = this.props;
+    const { classes, counts, selectAll, selectNone, openGenerator } = this.props;
 
     return (
       <AppBar position="fixed" color="default" className={classes.root}>
@@ -43,17 +49,35 @@ class Header extends Component {
           </Typography>
           {counts.total ? (
             <>
-              <Typography className={classes.grow}>{` | ${counts.selected} / ${counts.total} Selected`}</Typography>
+              <Typography
+                className={classes.white}
+              >{`[ ${counts.selected} / ${counts.total} Selected ]`}</Typography>
               <Button
+                classes={{
+                  root: classes.selectButton,
+                  label: classes.white
+                }}
+                size="small"
                 onClick={selectAll}
                 disabled={counts.selected === counts.total}
-                variant="outlined"
+
               >Select All</Button>
               <Button
+                classes={{
+                  root: classes.selectButton,
+                  label: classes.white
+                }}
+                size="small"
                 onClick={selectNone}
                 disabled={counts.selected === 0}
-                variant="outlined"
+
               >Select None</Button>
+              <Typography className={classes.grow}>{' '}</Typography>
+              <Button
+                onClick={openGenerator}
+              >
+                Generate Email
+              </Button>
             </>
           ) : null}
         </Toolbar>
@@ -64,7 +88,10 @@ class Header extends Component {
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
-  counts: PropTypes.object.isRequired
+  counts: PropTypes.object.isRequired,
+  selectAll: PropTypes.func.isRequired,
+  selectNone: PropTypes.func.isRequired,
+  openGenerator: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Header);

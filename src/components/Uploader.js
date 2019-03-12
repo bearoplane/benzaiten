@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 
-import classNames from 'classnames';
-import { smartSplit, templater } from '../utils';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
-import './Uploader.css';
+import classNames from 'classnames';
+import { smartSplit } from '../utils';
+
+const styles = {
+  dropzone: {
+    padding: "2vmin",
+    width: "80%",
+    margin: "auto",
+    borderRadius: "1vmin",
+    border: "1px dashed rgba(0, 0, 0, 0.4)",
+    textAlign: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+  }
+}
 
 /**
  * The Uploader component which accepts a .csv file
@@ -63,6 +76,8 @@ class Uploader extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
       <div className="Uploader">
         <Dropzone onDrop={this.onDrop}>
@@ -70,7 +85,7 @@ class Uploader extends Component {
             return (
               <div
                 {...getRootProps()}
-                className={classNames('dropzone', {'dropzone--isActive': isDragActive})}
+                className={classNames(classes.dropzone, {'dropzone--isActive': isDragActive})}
               >
                 <input {...getInputProps()} />
                 {
@@ -87,4 +102,8 @@ class Uploader extends Component {
   }
 }
 
-export default Uploader;
+Uploader.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Uploader);

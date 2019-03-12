@@ -1,63 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Paper from '@material-ui/core/Paper';
 
-import Typography from '@material-ui/core/Typography';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
+import Book from './Book';
 
-import Icon from '../icons';
-
-import classNames from 'classnames';
-
-// import './Main.css';
-
-/*
-<ListItemAvatar>
-
-</ListItemAvatar>
-*/
-
-/**
- * A little utility component for displaying the books.
- * Basically just a template.
- *
- */
-class Book extends Component {
-  render() {
-    let { book, handleToggle } = this.props;
-
-    return (
-      <ListItem>
-        <ListItemAvatar width="100px" height="100px" >
-          <Icon name={book.material_format}  />
-        </ListItemAvatar>
-        <ListItemText primary={book.title} secondary={
-          <React.Fragment>
-            <Typography component="span" color="textPrimary">
-              {book.author_name}
-            </Typography>
-            {book.item_call_number} {book.item_enumeration_and_chronology}
-          </React.Fragment>
-        } />
-        <ListItemSecondaryAction>
-          <Checkbox
-            checked={book.selected}
-            tabIndex={-1}
-            onChange={handleToggle}
-            disableRipple
-          />
-        </ListItemSecondaryAction>
-      </ListItem>
-    )
-  }
-}
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    backgroundColor: "#fff",
+    margin: "2vmin",
+  },
+});
 
 /*
 item_barcode,institution_symbol,item_holding_location,item_permanent_shelving_location,item_temporary_shelving_location,item_type,item_call_number,
@@ -82,11 +39,6 @@ publication_date (2018)
 language_code (eng)
 */
 
-Book.propTypes = {
-  book: PropTypes.object.isRequired,
-  checked: PropTypes.bool
-}
-
 /**
  * The Chooser component accepts an array of books and allows a user to choose
  *  the ones to appear on the Book List.
@@ -96,14 +48,22 @@ Book.propTypes = {
  */
 class Chooser extends Component {
   render() {
-    const { books, toggleChecked } = this.props;
+    const { classes, books, toggleChecked } = this.props;
 
     return (
-      <List className="Chooser">
-        { books.map((book, i) => <Book key={i} book={book} handleToggle={toggleChecked(book.id)} />) }
-      </List>
+      <Paper className={classes.root}>
+        <List>
+          { books.map((book, i) => <Book key={i} book={book} handleToggle={toggleChecked(book.id)} />) }
+        </List>
+      </Paper>
     );
   }
 }
 
-export default Chooser;
+Chooser.propTypes = {
+  classes: PropTypes.object.isRequired,
+  books: PropTypes.array.isRequired,
+  toggleChecked: PropTypes.func.isRequired,
+}
+
+export default withStyles(styles)(Chooser);

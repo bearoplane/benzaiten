@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
+
+html, body {
+  background-image: url(./prism.png);
+}
+
 body {
   margin: 0;
   padding: 0;
