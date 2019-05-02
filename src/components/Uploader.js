@@ -4,20 +4,36 @@ import Dropzone from 'react-dropzone';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 import classNames from 'classnames';
 import { smartSplit } from '../utils';
 
-const styles = {
+const styles = theme => ({
   dropzone: {
-    padding: "2vmin",
+    padding: theme.spacing.unit * 2,
     width: "80%",
-    margin: "auto",
+    margin: `${theme.spacing.unit * 2}px auto ${theme.spacing.unit * 8}px`,
     borderRadius: "1vmin",
     border: "1px dashed rgba(0, 0, 0, 0.4)",
     textAlign: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    backgroundColor: "rgba(255, 255, 255, 0.6)",
+    cursor: "pointer",
+    '&:hover': {
+      backgroundColor: "rgba(255, 255, 255, 0.8)",
+    }
+  },
+  instructions: {
+    width: '60%',
+    margin: 'auto',
+    padding: theme.spacing.unit * 2
+  },
+  instructionsList: {
+    fontSize: '1rem',
+    padding: `${theme.spacing.unit}px 0`
   }
-}
+})
 
 /**
  * The Uploader component which accepts a .csv file
@@ -91,12 +107,22 @@ class Uploader extends Component {
                 {
                   isDragActive ?
                     <p>Drop files here...</p> :
-                    <p>Try dropping some files here, or click to select files to upload.</p>
+                    <p>Drop file <strong>here</strong>, or click to select from your computer.</p>
                 }
               </div>
             )
           }}
         </Dropzone>
+        <Paper elevation={3} className={classes.instructions}>
+          <Typography variant="h2" component="h2">Instructions</Typography>
+          <Typography className={classes.instructionsList}>* The source document must be in csv (comma-separated value) format. If it is an Excel file, export it from Excel as a csv.</Typography>
+          <Typography className={classes.instructionsList}>1. Drag and drop the csv book list into Benzaiten. You may also click to select a file from the computer.</Typography>
+          <Typography className={classes.instructionsList}>2. Select the publications that you would like to appear in the resultant email.</Typography>
+          <Typography className={classes.instructionsList}>3. Click on [Generate Email].</Typography>
+          <Typography className={classes.instructionsList}>4. Click on [Copy to Clipboard].</Typography>
+          <Typography className={classes.instructionsList}>5. Paste in the email client of your choice.</Typography>
+          <Typography className={classes.instructionsList}>** To start over, simply refresh the page.</Typography>
+        </Paper>
       </div>
     );
   }

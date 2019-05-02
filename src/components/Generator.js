@@ -16,6 +16,27 @@ import Book from './Book';
  * @author [Matt Poirier](https://github.com/bearoplane)
  */
 class Generator extends Component {
+  constructor(props) {
+    super(props);
+
+    this.output = React.createRef();
+  }
+
+  copyToClipboard = () => {
+    let selection = window.getSelection();
+    let range = document.createRange();
+
+    // Select the text
+    range.selectNode(this.output.current);
+    selection.addRange(range);
+
+    // Copy the selection to the clipboard
+    document.execCommand('copy');
+
+    // Empty the selection
+    selection.empty();
+  }
+
   render() {
     const { classes, books, open, handleClose } = this.props;
 
@@ -24,14 +45,19 @@ class Generator extends Component {
         open={open}
         onClose={handleClose}
         scroll="paper"
+        maxWidth="lg"
+        fullWidth={true}
       >
         <DialogContent>
           <DialogContentText>
-            { books.map((book, i) => <Book key={i} book={book} display={true} />) }
+            <div ref={this.output}>
+              <span>{ /* spacer */ }</span>
+              { books.map((book, i) => <Book key={i} book={book} display={true} />) }
+            </div>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button>Copy to Clipboard</Button>
+          <Button onClick={this.copyToClipboard}>Copy to Clipboard</Button>
         </DialogActions>
       </Dialog>
     )
