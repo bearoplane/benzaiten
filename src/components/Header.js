@@ -70,7 +70,6 @@ class Header extends Component {
                 size="small"
                 onClick={selectNone}
                 disabled={counts.selected === 0}
-
               >Select None</Button>
               <Typography className={classes.grow}>{' '}</Typography>
               <Button

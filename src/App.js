@@ -8,10 +8,10 @@ import BookStore from './BookStore.js';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <React.Fragment>
         <CssBaseline />
         <Main store={BookStore} />
-      </div>
+      </React.Fragment>
     );
   }
 }

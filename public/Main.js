@@ -89,7 +89,6 @@ class Main extends Component {
           selectAll={this.selectAll}
           selectNone={this.selectNone}
           openGenerator={this.toggleOpenGenerator}
-          foo="hey"
         />
         <div className={classes.shim} />
         {

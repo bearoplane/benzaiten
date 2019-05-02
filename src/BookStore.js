@@ -15,6 +15,14 @@ For the id I use item_barcode because I assume it's unique.
 const BookStore = {
   data: {},
 
+  filterValues (book) {
+    if (book['item_enumeration_and_chronology']) {
+      book['item_enumeration_and_chronology'] = book['item_enumeration_and_chronology'].replace(/\(year\) ?/, '');
+    }
+
+    return book;
+  },
+
   /**
    * books
    */
@@ -29,7 +37,7 @@ const BookStore = {
       // We use item_barcode for the id. The book is given an id once it is
       //  added into the store.
       book.id = book.item_barcode;
-      data[book.id] = book;
+      data[book.id] = this.filterValues(book);
 
       return data;
     }, this.data);

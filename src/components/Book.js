@@ -17,14 +17,15 @@ import Icon from '../icons';
  * Basically just a template.
  *
  */
+ // <Icon name={book.material_format}  />
 class Book extends Component {
   render() {
-    let { book, handleToggle } = this.props;
+    let { book, handleToggle, display } = this.props;
 
     return (
       <ListItem>
-        <ListItemAvatar width="100px" height="100px" >
-          <Icon name={book.material_format}  />
+        <ListItemAvatar width="100px">
+          <img src={require('../icons/Book.png')} />
         </ListItemAvatar>
         <ListItemText primary={book.title} secondary={
           <React.Fragment>
@@ -34,14 +35,16 @@ class Book extends Component {
             {book.item_call_number} {book.item_enumeration_and_chronology}
           </React.Fragment>
         } />
-        <ListItemSecondaryAction>
-          <Checkbox
-            checked={!!book.selected}
-            tabIndex={-1}
-            onChange={handleToggle}
-            disableRipple
-          />
-        </ListItemSecondaryAction>
+        { !display &&
+          <ListItemSecondaryAction>
+            <Checkbox
+              checked={!!book.selected}
+              tabIndex={-1}
+              onChange={handleToggle}
+              disableRipple
+            />
+          </ListItemSecondaryAction>
+        }
       </ListItem>
     )
   }
@@ -49,7 +52,8 @@ class Book extends Component {
 
 Book.propTypes = {
   book: PropTypes.object.isRequired,
-  handleToggle: PropTypes.func.isRequired,
+  handleToggle: PropTypes.func,
+  display: PropTypes.bool
 }
 
 export default Book;
