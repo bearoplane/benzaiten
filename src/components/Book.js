@@ -27,8 +27,8 @@ class Book extends Component {
 
     return (
       <ListItem>
-        <ListItemAvatar width="100px">
-          <img src={icon(book.material_format)} />
+        <ListItemAvatar>
+          <img style={{width: '64px', height: '64px'}} src={icon(book.material_format)} />
         </ListItemAvatar>
         <ListItemText primary={
           <Link href={`https://unb.on.worldcat.org/oclc/${book.oclc_number}`}>{book.title}</Link>
