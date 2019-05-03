@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/benzaiten/precache-manifest.34e2231e801ef4f0ccf31bf5aea248d3.js"
+  "/benzaiten/precache-manifest.1d42bfca92b2338e92be1cd87715194a.js"
 );
 
 workbox.clientsClaim();
