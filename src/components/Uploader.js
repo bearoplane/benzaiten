@@ -122,6 +122,7 @@ class Uploader extends Component {
           <Typography className={classes.instructionsList}>4. Click on [Copy to Clipboard].</Typography>
           <Typography className={classes.instructionsList}>5. Paste in the email client of your choice.</Typography>
           <Typography className={classes.instructionsList}>** To start over, simply refresh the page.</Typography>
+          <Typography>For more information, visit <a href="http://github.com/bearoplane/benzaiten">Benzaiten at Github</a>.</Typography>
         </Paper>
       </div>
     );
