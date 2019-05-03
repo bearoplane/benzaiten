@@ -1,19 +1,7 @@
-import React from 'react';
+export default function (name) {
+  try {
+    return require(`./${name}.png`);
+  } catch (e) {
 
-import Book from './Book';
-import BookContinuing from './BookContinuing';
-import Journal from './Journal';
-
-const Icon = props => {
-  switch(props.name) {
-    case "Book":
-      return <Book {...props} />;
-    case "Book_Continuing":
-      return <BookContinuing {...props} />;
-    case "Jrnl":
-      return <Journal {...props} />;
-    default:
-      return <div />;
   }
 }
-export default Icon;

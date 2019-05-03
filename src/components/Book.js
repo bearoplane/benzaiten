@@ -8,10 +8,10 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import Icon from '../icons';
-
+import icon from '../icons';
 
 /**
  * A little utility component for displaying the books.
@@ -23,12 +23,16 @@ class Book extends Component {
   render() {
     let { book, handleToggle, display } = this.props;
 
+    if (!book.id) return null;
+
     return (
       <ListItem>
         <ListItemAvatar width="100px">
-          <img src={require('../icons/Book.png')} />
+          <img src={icon(book.material_format)} />
         </ListItemAvatar>
-        <ListItemText primary={book.title} secondary={
+        <ListItemText primary={
+          <Link href={`https://unb.on.worldcat.org/oclc/${book.oclc_number}`}>{book.title}</Link>
+        } secondary={
           <React.Fragment>
             <Typography component="span" color="textPrimary">
               {book.author_name}
