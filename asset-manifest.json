@@ -1,7 +1,7 @@
 {
   "main.css": "/benzaiten/static/css/main.b20cf6c4.chunk.css",
-  "main.js": "/benzaiten/static/js/main.f2bdc3ea.chunk.js",
-  "main.js.map": "/benzaiten/static/js/main.f2bdc3ea.chunk.js.map",
+  "main.js": "/benzaiten/static/js/main.7e1c06e8.chunk.js",
+  "main.js.map": "/benzaiten/static/js/main.7e1c06e8.chunk.js.map",
   "static/css/1.dc1dbf05.chunk.css": "/benzaiten/static/css/1.dc1dbf05.chunk.css",
   "static/js/1.cd896cb7.chunk.js": "/benzaiten/static/js/1.cd896cb7.chunk.js",
   "static/js/1.cd896cb7.chunk.js.map": "/benzaiten/static/js/1.cd896cb7.chunk.js.map",
@@ -11,6 +11,6 @@
   "static/css/main.b20cf6c4.chunk.css.map": "/benzaiten/static/css/main.b20cf6c4.chunk.css.map",
   "static/css/1.dc1dbf05.chunk.css.map": "/benzaiten/static/css/1.dc1dbf05.chunk.css.map",
   "index.html": "/benzaiten/index.html",
-  "precache-manifest.1d42bfca92b2338e92be1cd87715194a.js": "/benzaiten/precache-manifest.1d42bfca92b2338e92be1cd87715194a.js",
+  "precache-manifest.5d9a5de1757ab518e3c4280071151fa5.js": "/benzaiten/precache-manifest.5d9a5de1757ab518e3c4280071151fa5.js",
   "service-worker.js": "/benzaiten/service-worker.js"
 }
