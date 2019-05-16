@@ -42,6 +42,12 @@ const styles = theme => ({
  * @author [Matt Poirier](https://github.com/bearoplane)
  */
 class Uploader extends Component {
+  validFileTypes = [
+    "text/csv",
+    "application/csv",
+    "application/vnd.ms-excel"
+  ]
+
   /**
    * onDrop is called by <Dropzone> when a file is uploaded.
    * It's main function is to read the file into memory.
@@ -49,29 +55,16 @@ class Uploader extends Component {
   onDrop = (acceptedFiles, rejectedFiles) => {
     const { updateBooks } = this.props;
 
-    console.log('acceptedFiles', acceptedFiles);
-
     if (acceptedFiles.length !== 1) {
       // @todo do error message
-      console.log('Must be exactly one file.');
+      alert('Must be exactly one file.');
       return;
     }
 
     let droppedFile = acceptedFiles[0];
 
-    let {
-      lastModified,
-      lastModifiedDate,
-      name,
-      size,
-      type,
-      webkitRelativePath
-    } = droppedFile;
-
-    console.log('droppedFile', lastModified, lastModifiedDate, name, size, type, webkitRelativePath);
-
-    if (droppedFile.type !== 'text/csv') {
-      console.log('Must be CSV file.');
+    if (!this.validFileTypes.includes(droppedFile.type) || (droppedFile.name.slice(-4) !== '.csv')) {
+      alert('Must be a CSV file with ".csv" extension.');
       return;
     }
 
