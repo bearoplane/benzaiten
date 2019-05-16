@@ -49,6 +49,8 @@ class Uploader extends Component {
   onDrop = (acceptedFiles, rejectedFiles) => {
     const { updateBooks } = this.props;
 
+    console.log('acceptedFiles', acceptedFiles);
+
     if (acceptedFiles.length !== 1) {
       // @todo do error message
       console.log('Must be exactly one file.');
@@ -56,6 +58,17 @@ class Uploader extends Component {
     }
 
     let droppedFile = acceptedFiles[0];
+
+    let {
+      lastModified,
+      lastModifiedDate,
+      name,
+      size,
+      type,
+      webkitRelativePath
+    } = droppedFile;
+
+    console.log('droppedFile', lastModified, lastModifiedDate, name, size, type, webkitRelativePath);
 
     if (droppedFile.type !== 'text/csv') {
       console.log('Must be CSV file.');
